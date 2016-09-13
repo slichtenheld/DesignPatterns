@@ -1,0 +1,7 @@
+#gitignore for intellij
+
+#user-specific
+.idea
+
+#intellij stuff
+DesignPatterns.iml
