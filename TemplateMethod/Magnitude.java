@@ -31,7 +31,7 @@ public abstract class Magnitude {
 
     // a!=b if (!(a<b)||!(b<a))
     public boolean notEqual(Magnitude m){
-        if (!(this.lessThan(m))||!(m.lessThan(this))) return true;
+        if (!this.equalTo(m)) return true;
         return false;
     }
 

@@ -19,8 +19,7 @@ public class main {
             System.out.println("passed.");
         }
         else System.out.println("failed.");
-
-        simpleTest();
+        
     }
 
     public static boolean cpTest(){
@@ -74,7 +73,7 @@ public class main {
                 (c2.greaterThan(c1))&& //true
 
                 (c1.notEqual(c0))&& //true
-                (c2.notEqual(c3)) //true
+                !(c2.notEqual(c2)) //true
         );
     }
 
