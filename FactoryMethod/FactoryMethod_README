@@ -1,0 +1,18 @@
+FactoryMethod README
+
+Intent: Define an interface for creating an object,
+but let subclasses decide what class to instantiate.
+
+Qualifications: the operation must
+1) return a new object
+2) return instance of a type - ie something that multiple classes would implement
+3) be intended to be implemented by multiple derived classes
+
+Unparameterized FM
+- vends single product type
+- method invoked determines the product
+
+Parameterized FM
+- vends multiple kinds of products
+- token passed to method to determine which product to vend
+
