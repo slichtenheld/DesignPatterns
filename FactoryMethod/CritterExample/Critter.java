@@ -14,4 +14,5 @@ public abstract class Critter {
     private void omNomNom(Chow chow){
         System.out.println(chow.returnName() + " is delicious!");
     }
+
 }
