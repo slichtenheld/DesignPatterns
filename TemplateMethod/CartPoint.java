@@ -1,7 +1,5 @@
 package TemplateMethod;
 
-import java.lang.management.ManagementFactory;
-
 /**
  * Created by Sam on 9/13/2016.
  */

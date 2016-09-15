@@ -9,30 +9,28 @@ package TemplateMethod;
 
 public abstract class Magnitude {
 
-    public abstract boolean lessThan(Magnitude m);
+    protected abstract boolean lessThan(Magnitude m);
 
-    public boolean lessThanEqualTo(Magnitude m){
+    protected boolean lessThanEqualTo(Magnitude m){
         return lessThan(m)|equalTo(m);
     }
 
     // a=b if (!(a<b)&&!(b<a))
-    public boolean equalTo(Magnitude m){
+    protected boolean equalTo(Magnitude m){
         if (!(this.lessThan(m))&&!(m.lessThan(this))) return true;
         return false;
     }
 
-    public boolean greaterThanEqualTo(Magnitude m){
+    protected boolean greaterThanEqualTo(Magnitude m){
         return !lessThan(m);
     }
 
-    public boolean greaterThan(Magnitude m){
+    protected boolean greaterThan(Magnitude m){
         return !lessThanEqualTo(m);
     }
 
-    // a!=b if (!(a<b)||!(b<a))
-    public boolean notEqual(Magnitude m){
+    protected boolean notEqual(Magnitude m){
         if (!this.equalTo(m)) return true;
         return false;
     }
-
 }

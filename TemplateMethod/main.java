@@ -19,7 +19,7 @@ public class main {
             System.out.println("passed.");
         }
         else System.out.println("failed.");
-        
+
     }
 
     public static boolean cpTest(){
