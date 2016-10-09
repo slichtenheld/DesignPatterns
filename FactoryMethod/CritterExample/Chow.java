@@ -5,6 +5,6 @@ package FactoryMethod.CritterExample;
  */
 public interface Chow {
 
-    abstract String returnName();
+    String returnName();
 
 }

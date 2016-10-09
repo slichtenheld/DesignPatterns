@@ -8,7 +8,7 @@ import FactoryMethod.MazeExample.Components.*;
 
 //classes can then extend from this to specialize parts of the maze
 
-public abstract class MazeGame {
+public class MazeGame {
 
     public Maze createMaze(){
         Maze aMaze = makeMaze();
