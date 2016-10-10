@@ -12,57 +12,68 @@ public class main {
 
     public static void main(String[] args){
         daveTest();
+        compositeListTest();
+        compositeArrayTest();
+        compositeInstanceTEST();
+        linkedListTest();
     }
 
     public static void daveTest(){
         Component lc = new LinkedComposite( new Leaf( "A" ), new Leaf( "B" ) );
         Component ac = new ArrayComposite( new Leaf( "C" ), lc, new Leaf( "D" ) );
-        System.out.print(ac.toString());
+        System.out.println(ac.toString());
     }
 
     public static void compositeListTest(){
         LinkedComposite l = new LinkedComposite(new Leaf("H"), new Leaf("I"), new Leaf("J"));
         LinkedComposite ll = new LinkedComposite(new Leaf("K"), new Leaf("L"), new Leaf("M"));
         LinkedComposite lll = new LinkedComposite(l,ll);
-        System.out.print(lll);
+        lll.remove(l);
+        Leaf c = new Leaf("C");
+        InstanceComposite test = new InstanceComposite(c);
+        lll.add(test);
+        System.out.println(lll);
     }
 
     public static void compositeArrayTest(){
-        InstanceComposite c = new InstanceComposite(new Leaf("C"));
+        Leaf l = new Leaf("C");
+        InstanceComposite c = new InstanceComposite(l);
         ArrayComposite arrayComposite = new ArrayComposite(new Leaf("A"), new Leaf("B"), c);
         ArrayComposite arrayComposite2 = new ArrayComposite(new Leaf("D"), new Leaf("E"), new Leaf("F"));
 
-        //ArrayComposite compositeArray3 = new ArrayComposite(arrayComposite, arrayComposite2);
-        System.out.print(arrayComposite.toString());
-        arrayComposite.printParent();
+        ArrayComposite three = new ArrayComposite(arrayComposite, arrayComposite2);
+        three.remove(arrayComposite2);
+        three.remove(arrayComposite);
+        three.add(arrayComposite2);
+        three.add(arrayComposite);
+        System.out.println(three.toString());
     }
 
     public static void compositeInstanceTEST() {
-        InstanceComposite instanceComposite2 = new InstanceComposite(new Leaf("C"));
+        Leaf test = new Leaf("C");
+        Leaf l = new Leaf("Replacement");
+        InstanceComposite instanceComposite2 = new InstanceComposite(test);
         InstanceComposite instanceComposite3 = new InstanceComposite(instanceComposite2);
         InstanceComposite instanceComposite = new InstanceComposite(instanceComposite3);
-        System.out.print( instanceComposite.toString() );
+        instanceComposite2.remove(test);
+        instanceComposite2.add(l);
+        System.out.println( instanceComposite.toString() );
     }
     public static void linkedListTest(){
         LinkedList linkedList = new LinkedList();
-        linkedList.append(new Node("This "));
-        linkedList.append(new Node("is "));
-        linkedList.append(new Node("a "));
-        linkedList.append(new Node("test. "));
 
-        LinkedListIterator iter = new LinkedListIterator(linkedList);
-        if (iter.currentItem().returnData() == "is "){
-            linkedList.remove(iter.currentItem());
-            System.out.println("****");
-        }
-        do {
-            iter.traverse();
-            if (iter.currentItem().returnData() == "is "){
-                linkedList.remove(iter.currentItem());
-                System.out.println("****");
-            }
-        } while (!iter.isDone());
+        Node this_ = new Node("This ");
+        Node is_ = new Node("is ");
+        Node a_ = new Node("a ");
+        Node test_ = new Node("test. ");
+        linkedList.append(this_);
+        linkedList.append(is_);
+        linkedList.append(a_);
+        linkedList.append(test_);
 
+        linkedList.remove(test_);
+        linkedList.remove("is ");
+        linkedList.append(new Node("tsetsdf"));
 
         LinkedListIterator iter2 = new LinkedListIterator(linkedList);
         System.out.print(iter2.currentItem().returnData());

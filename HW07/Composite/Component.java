@@ -23,11 +23,12 @@ public abstract class Component {
 
     private int getDepth() {
         return depth;
-    }
+    } // FIXME: IMPLEMENT CACHING
 
     private void setDepth(){
         depth();
-    }
+    } // FIXME: IMPLEMENT CACHING
+
     private int depth() {
         if (getParent()==null) return 0;
         else return getParent().depth()+1;

@@ -5,12 +5,13 @@ package HW07.LinkedList;
  */
 public class LinkedListIterator<T> implements Iterator{
 
-    //private LinkedList linkedList;
+    private LinkedList linkedList;
     private final Node head;
     private Node current;
 
     public LinkedListIterator(LinkedList linkedList){
-        this.head = linkedList.getHead();
+        this.linkedList = linkedList;
+        this.head = this.linkedList.getHead();
         this.current = this.head;
     }
 
@@ -32,7 +33,11 @@ public class LinkedListIterator<T> implements Iterator{
 
     @Override
     public boolean isDone() {
-        return (current.getNext() == null);
+        if (linkedList.getCount() == 0) {
+            return true;
+        }
+        else if (current.getNext() == null) return true;
+        return false;
     }
 
     @Override

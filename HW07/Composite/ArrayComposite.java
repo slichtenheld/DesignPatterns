@@ -21,12 +21,24 @@ public class ArrayComposite extends AbstractComposite {
 
     @Override
     public void add(Component component) {
-
+        for (int i = 0; i < children.length; i ++) {
+            if (children[i] == null) {
+                children[i] = component;
+                component.setParent(this);
+                break;
+            }
+        }
     }
 
     @Override
     public void remove(Component component) {
-
+        for (int i = 0; i < children.length; i++){
+            if (children[i] == component) { // delete and remove parent
+                children[i].setParent(null);
+                children[i] = null;
+                break;
+            }
+        }
     }
 
     @Override
@@ -38,10 +50,12 @@ public class ArrayComposite extends AbstractComposite {
     public String toString() {
         String temp = "";
         for (int i = 0; i < children.length; i++){
-            temp+= children[i].toString();
-            temp+="\n";
+            if (children[i] != null){
+                temp+="\n";
+                temp+= children[i].toString();
+            }
         }
-        temp = temp.substring(0, temp.length()-1);
-        return super.toString() + "ArrayComposite containing\n" + temp;
+        //temp = temp.substring(0, temp.length()-1);
+        return super.toString() + "ArrayComposite containing" + temp;
     }
 }

@@ -6,7 +6,6 @@ package HW07.LinkedList;
 public class LinkedList<T> implements AbstractList{
 
     private Node<T> head = null;
-    private Node<T> tail = null;
     int count = 0;
 
     @Override
@@ -28,13 +27,32 @@ public class LinkedList<T> implements AbstractList{
     public void append(Node node) {
         if (head==null){
             head = node;
-            tail = node;
         }
         else {
-            tail.setNext(node);
-            tail = node;
+            Iterator iter = createIterator();
+            while (!iter.isDone()) {
+                iter.traverse();
+            }
+            iter.currentItem().setNext(node);
         }
         countInc();
+    }
+
+    public boolean remove(T data) { // returns true if successful
+        if (head.returnData() == data) { // if nodes component equals passed in component
+            remove(head);
+            return true;
+        }
+        else {
+            Iterator iter = createIterator(); // iterate through list and remove if data matches
+            while (!iter.isDone()) {
+                if (iter.next().returnData() == data) {
+                    remove(iter.next());
+                    return true;
+                } else iter.traverse();
+            }
+            return false;
+        }
     }
 
     @Override
@@ -52,7 +70,8 @@ public class LinkedList<T> implements AbstractList{
                     iter.traverse();
                     temp.setNext(iter.next());
                     countDec();
-                } else iter.traverse();
+                }
+                else iter.traverse();
             }
         }
     }

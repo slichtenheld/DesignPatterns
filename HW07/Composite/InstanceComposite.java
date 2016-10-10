@@ -13,13 +13,18 @@ public class InstanceComposite extends AbstractComposite {
 
     @Override
     public void add(Component component) { //
-        child = component;
-        component.setParent(this);
+        if (child == null){ // child must be removed first
+            child = component;
+            component.setParent(this);
+        }
     }
 
     @Override
     public void remove(Component component) {
-        if (child == component) child = null;
+        if (child == component) {
+            child.setParent(null);
+            child = null;
+        }
     }
 
     @Override
@@ -29,6 +34,12 @@ public class InstanceComposite extends AbstractComposite {
 
     @Override
     public String toString() {
-        return super.toString() + "InstanceComposite containing\n" + child.toString();
+        String temp = "";
+        try {
+            temp += "\n" + child.toString();
+        } catch (NullPointerException e){
+            System.err.print("NullPointerException: " + e.getMessage());
+        }
+        return super.toString() + "InstanceComposite containing" + temp;
     }
 }

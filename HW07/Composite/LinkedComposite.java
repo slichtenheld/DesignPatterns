@@ -2,7 +2,6 @@ package HW07.Composite;
 
 import HW07.LinkedList.Iterator;
 import HW07.LinkedList.LinkedList;
-import HW07.LinkedList.LinkedListIterator;
 import HW07.LinkedList.Node;
 
 /**
@@ -27,7 +26,9 @@ public class LinkedComposite extends AbstractComposite {
 
     @Override
     public void remove(Component component) {
-
+        if (childrenList.remove(component)) { // if removal successful, dereference component's parent
+            component.setParent(null);
+        }
     }
 
     @Override
@@ -38,17 +39,16 @@ public class LinkedComposite extends AbstractComposite {
     @Override
     public String toString() {
 
-        // FIXME: WHY DOES FOR LOOP NOT WORK WITH ITERATOR?
         String temp = "";
         Iterator iter = childrenList.createIterator();
-        temp += iter.currentItem().returnData().toString();
+        if (childrenList.getCount()==0) return super.toString() + "LinkedComposite containing";
         temp+="\n";
-        do {
+        temp += iter.currentItem().returnData().toString();
+        while ( !iter.isDone() ){
             iter.traverse();
-            temp += iter.currentItem().returnData().toString();
             temp+="\n";
-        } while ( !iter.isDone() );
-        temp = temp.substring(0, temp.length()-1);
-        return super.toString() + "LinkedComposite containing\n" + temp;
+            temp += iter.currentItem().returnData().toString();
+        }
+        return super.toString() + "LinkedComposite containing" + temp;
     }
 }
