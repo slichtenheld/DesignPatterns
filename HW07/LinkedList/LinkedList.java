@@ -3,24 +3,13 @@ package HW07.LinkedList;
 /**
  * Created by Sam on 10/9/2016.
  */
-public class LinkedList<T> implements AbstractList{
+public class LinkedList<S> implements AbstractList{
 
-    private Node<T> head = null;
-    int count = 0;
-
-    @Override
-    public Iterator createIterator() {
-        return new LinkedListIterator<T>(this);
-    }
+    private Node<S> head = null;
 
     @Override
-    public Node getHead() {
-        return head;
-    }
-
-    @Override
-    public int getCount() {
-        return count;
+    public Iter createIterator() {
+        return new LinkedListIterator<S>(this);
     }
 
     @Override
@@ -29,29 +18,11 @@ public class LinkedList<T> implements AbstractList{
             head = node;
         }
         else {
-            Iterator iter = createIterator();
-            while (!iter.isDone()) {
-                iter.traverse();
+            Iter<Node> iter = createIterator();
+            while ( !iter.isDone() ) {
+                iter.next();
             }
             iter.currentItem().setNext(node);
-        }
-        countInc();
-    }
-
-    public boolean remove(T data) { // returns true if successful
-        if (head.returnData() == data) { // if nodes component equals passed in component
-            remove(head);
-            return true;
-        }
-        else {
-            Iterator iter = createIterator(); // iterate through list and remove if data matches
-            while (!iter.isDone()) {
-                if (iter.next().returnData() == data) {
-                    remove(iter.next());
-                    return true;
-                } else iter.traverse();
-            }
-            return false;
         }
     }
 
@@ -60,28 +31,38 @@ public class LinkedList<T> implements AbstractList{
 
         if (head == node) {
             head = head.getNext();
-            countDec();
-        }
-        else {
-            Iterator iter = createIterator();
-            while (!iter.isDone()) {
-                if (iter.next() == node) {
-                    Node<T> temp = iter.currentItem();
-                    iter.traverse();
-                    temp.setNext(iter.next());
-                    countDec();
+        } else {
+            Iter<Node> iter = createIterator();
+            do {
+                Node temp = iter.currentItem();
+                iter.next();
+                if (iter.currentItem() == node) {
+                    iter.next();
+                    temp.setNext(iter.currentItem());
                 }
-                else iter.traverse();
-            }
+            } while (!iter.isDone());
         }
     }
 
-    private void countInc(){
-        count++;
+    @Override
+    public Node getHead() {
+        return head;
     }
 
-    private void countDec(){
-        count--;
-    }
-
+//    public boolean remove(T data) { // returns true if successful
+//        if (head.returnData() == data) { // if nodes component equals passed in component
+//            remove(head);
+//            return true;
+//        }
+//        else {
+//            Iter iter = createIterator(); // iterate through list and remove if data matches
+//            while (!iter.isDone()) {
+//                if (iter.next().returnData() == data) {
+//                    remove(iter.next());
+//                    return true;
+//                } else iter.traverse();
+//            }
+//            return false;
+//        }
+//    }
 }

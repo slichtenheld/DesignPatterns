@@ -1,61 +1,38 @@
 package HW07.Composite;
 
+import HW07.LinkedList.Iter;
+
 /**
  * Created by sam on 10/9/16.
  */
-public class ArrayComposite extends AbstractComposite {
+public class ArrayComposite extends Composite {
 
-    private Component[] children;
+    private Composite[] children;
 
-    public ArrayComposite(Component... components){
+    public ArrayComposite(Composite... components){
         this.children = components;
-        for (Component c : children) { //register each component with parent
+        for (Composite c : children) { //register each component with parent
             c.setParent(this);
         }
     }
 
-    public void printParent(){
-        if (super.getParent()==null) System.out.println("\nparent null");
-        else System.out.println("\nnot null");
+    @Override
+    protected void doAdd( Composite part ) {
     }
 
     @Override
-    public void add(Component component) {
-        for (int i = 0; i < children.length; i ++) {
-            if (children[i] == null) {
-                children[i] = component;
-                component.setParent(this);
-                break;
-            }
-        }
+    protected void doRemove( Composite part ) {
     }
 
     @Override
-    public void remove(Component component) {
-        for (int i = 0; i < children.length; i++){
-            if (children[i] == component) { // delete and remove parent
-                children[i].setParent(null);
-                children[i] = null;
-                break;
-            }
-        }
-    }
-
-    @Override
-    public AbstractComposite getChild(int num) {
+    public Iter makeIterator() {
         return null;
     }
 
     @Override
-    public String toString() {
-        String temp = "";
-        for (int i = 0; i < children.length; i++){
-            if (children[i] != null){
-                temp+="\n";
-                temp+= children[i].toString();
-            }
-        }
-        //temp = temp.substring(0, temp.length()-1);
-        return super.toString() + "ArrayComposite containing" + temp;
+    public Composite getChild(int num) {
+        return null;
     }
+
+
 }

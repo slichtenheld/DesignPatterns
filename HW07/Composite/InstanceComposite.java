@@ -1,45 +1,34 @@
 package HW07.Composite;
 
+import HW07.LinkedList.Iter;
+
 /**
  * Created by sam on 10/9/16.
  */
-public class InstanceComposite extends AbstractComposite {
+public class InstanceComposite extends Composite {
 
-    private Component child;
+    private Composite child;
 
-    public InstanceComposite(Component component) {
+    public InstanceComposite(Composite component) {
         add(component);
     }
 
     @Override
-    public void add(Component component) { //
-        if (child == null){ // child must be removed first
-            child = component;
-            component.setParent(this);
-        }
+    protected void doAdd( Composite part ) {
     }
 
     @Override
-    public void remove(Component component) {
-        if (child == component) {
-            child.setParent(null);
-            child = null;
-        }
+    protected void doRemove( Composite part ) {
     }
 
     @Override
-    public Component getChild(int num) {
+    public Iter makeIterator() {
+        return null;
+    }
+
+    @Override
+    public Composite getChild(int num) {
         return child;
     }
 
-    @Override
-    public String toString() {
-        String temp = "";
-        try {
-            temp += "\n" + child.toString();
-        } catch (NullPointerException e){
-            System.err.print("NullPointerException: " + e.getMessage());
-        }
-        return super.toString() + "InstanceComposite containing" + temp;
-    }
 }

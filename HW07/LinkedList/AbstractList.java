@@ -5,8 +5,7 @@ package HW07.LinkedList;
  */
 public interface AbstractList {
 
-    Iterator createIterator();
-    int getCount();
+    Iter createIterator();
     void append(Node node);
     void remove(Node node);
     Node getHead();

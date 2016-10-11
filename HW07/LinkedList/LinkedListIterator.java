@@ -3,41 +3,31 @@ package HW07.LinkedList;
 /**
  * Created by sam on 10/9/16.
  */
-public class LinkedListIterator<T> implements Iterator{
+public class LinkedListIterator<T> implements Iter<Node<T>> {
 
-    private LinkedList linkedList;
-    private final Node head;
-    private Node current;
+    private LinkedList<T> linkedList;
+    private final Node<T> head;
+    private Node<T> current;
 
     public LinkedListIterator(LinkedList linkedList){
-        this.linkedList = linkedList;
-        this.head = this.linkedList.getHead();
-        this.current = this.head;
+        this.head = linkedList.getHead();
+        first();
     }
 
     @Override
-    public void reset() { // is this necessary???
-        current = head;
+    public void first() {
+        current = this.head;
     }
 
     @Override
-    public void traverse() { //returns current node, and traverses down one
+    public void next() { //returns current node, and traverses down one
         if (!isDone())
             current = current.getNext();
     }
 
     @Override
-    public Node next() {
-        return current.getNext();
-    }
-
-    @Override
     public boolean isDone() {
-        if (linkedList.getCount() == 0) {
-            return true;
-        }
-        else if (current.getNext() == null) return true;
-        return false;
+        return  (current.getNext() == null);
     }
 
     @Override

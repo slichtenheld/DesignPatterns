@@ -1,18 +1,25 @@
 package HW07.Composite;
 
+import HW07.LinkedList.Iter;
+
 /**
  * Created by sam on 10/9/16.
  */
 public class Leaf extends Component {
 
-    String data;
-
-    public Leaf(String string){
-        this.data = string;
+    public Leaf(int id){
+        super.setInstanceID(id);
     }
 
     @Override
-    public String toString() {
-        return super.toString() + "Leaf " + data;
+    public Iter makeIterator() {
+        // return LeafIterator
+        return null;
     }
+
+    @Override
+    public Composite getChild(int num) {
+        return null;
+    }
+
 }

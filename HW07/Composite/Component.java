@@ -1,45 +1,35 @@
 package HW07.Composite;
 
+
+import HW07.LinkedList.Iter;
+
 /**
  * Created by sam on 10/9/16.
  */
 public abstract class Component {
 
-    private Component parent = null;
+    private Composite parent = null;
+    private int instanceID = 0;
     private int depth = 0;
 
-    public String toString(){
-        return indent();
+    public abstract Iter makeIterator();
+    public abstract Composite getChild(int num);
+
+    final public String toString(){
+        return (parent==null) ? instanceID + " is the root." :
+                instanceID + " is the child of " + parent; // automagically calls toString method?
     }
 
-    protected Component getParent() {
+    final protected Composite getParent() {
         return parent;
     }
 
-    protected void setParent(Component component) {
-        this.parent = component;
-        //setDepth();
+    final protected void setParent(Composite component) {
+        parent = component;
     }
 
-    private int getDepth() {
-        return depth;
-    } // FIXME: IMPLEMENT CACHING
-
-    private void setDepth(){
-        depth();
-    } // FIXME: IMPLEMENT CACHING
-
-    private int depth() {
-        if (getParent()==null) return 0;
-        else return getParent().depth()+1;
-    }
-
-    private String indent(){
-        String indent = "";
-        for(int i = 0; i < depth(); i++){
-            indent+="   ";
-        }
-        return indent;
+    final protected void setInstanceID (int id){
+        instanceID = id;
     }
 
 }

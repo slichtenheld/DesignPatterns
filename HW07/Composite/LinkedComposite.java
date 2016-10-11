@@ -1,54 +1,39 @@
 package HW07.Composite;
 
-import HW07.LinkedList.Iterator;
+import HW07.LinkedList.Iter;
 import HW07.LinkedList.LinkedList;
-import HW07.LinkedList.Node;
 
 /**
  * Created by sam on 10/9/16.
  */
-public class LinkedComposite extends AbstractComposite {
+public class LinkedComposite extends Composite {
 
-    private LinkedList<Component> childrenList;
+    private LinkedList<Composite> childrenList;
 
-    public LinkedComposite(Component... components){
+    public LinkedComposite(Composite... components){
         childrenList = new LinkedList<>();
-        for (Component c : components) { //register each component with parent
+        for (Composite c : components) { //register each component with parent
             add(c);
         }
     }
 
     @Override
-    public void add(Component component) {
-        childrenList.append(new Node<Component>(component));
-        component.setParent(this);
+    protected void doAdd( Composite part ) {
     }
 
     @Override
-    public void remove(Component component) {
-        if (childrenList.remove(component)) { // if removal successful, dereference component's parent
-            component.setParent(null);
-        }
+    protected void doRemove( Composite part ) {
     }
 
     @Override
-    public AbstractComposite getChild(int num) {
+    public Iter makeIterator() {
         return null;
     }
 
     @Override
-    public String toString() {
-
-        String temp = "";
-        Iterator iter = childrenList.createIterator();
-        if (childrenList.getCount()==0) return super.toString() + "LinkedComposite containing";
-        temp+="\n";
-        temp += iter.currentItem().returnData().toString();
-        while ( !iter.isDone() ){
-            iter.traverse();
-            temp+="\n";
-            temp += iter.currentItem().returnData().toString();
-        }
-        return super.toString() + "LinkedComposite containing" + temp;
+    public Composite getChild(int num) {
+        return null;
     }
+
+
 }
