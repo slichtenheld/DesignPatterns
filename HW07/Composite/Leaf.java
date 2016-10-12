@@ -1,20 +1,21 @@
 package HW07.Composite;
 
+import HW07.LinkedList.InstanceIterator;
 import HW07.LinkedList.Iter;
+import HW07.LinkedList.LeafIterator;
 
 /**
  * Created by sam on 10/9/16.
  */
 public class Leaf extends Component {
 
-    public Leaf(int id){
-        super.setInstanceID(id);
+    public Leaf(){
+        super.setInstanceID();
     }
 
     @Override
     public Iter makeIterator() {
-        // return LeafIterator
-        return null;
+        return new LeafIterator();
     }
 
     @Override

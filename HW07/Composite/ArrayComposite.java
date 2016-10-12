@@ -1,5 +1,6 @@
 package HW07.Composite;
 
+import HW07.LinkedList.ArrayIterator;
 import HW07.LinkedList.Iter;
 
 /**
@@ -7,32 +8,47 @@ import HW07.LinkedList.Iter;
  */
 public class ArrayComposite extends Composite {
 
-    private Composite[] children;
+    private Component[] children;
 
-    public ArrayComposite(Composite... components){
+    public ArrayComposite(Component... components){
+        super.setInstanceID();
         this.children = components;
-        for (Composite c : children) { //register each component with parent
-            c.setParent(this);
+        //register each component with parent
+        for (Component c : children) add(c);
+    }
+
+    @Override
+    protected void doAdd( Component part ) {
+        for ( int i = 0; i < children.length; i++ ) {
+            if ( children[i] == null ) {
+                children[i] = part;
+                break;
+            }
         }
     }
 
     @Override
-    protected void doAdd( Composite part ) {
-    }
-
-    @Override
-    protected void doRemove( Composite part ) {
+    protected void doRemove( Component part ) {
+        for ( int i = 0; i < children.length; i++ ) {
+            if ( children[i] == part ) {
+                children[i] = null;
+                break;
+            }
+        }
     }
 
     @Override
     public Iter makeIterator() {
-        return null;
+        return new ArrayIterator(children);
     }
 
     @Override
-    public Composite getChild(int num) {
-        return null;
+    public Component getChild(int num) {
+        try {
+            return children[num];
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw e;
+        }
     }
-
 
 }

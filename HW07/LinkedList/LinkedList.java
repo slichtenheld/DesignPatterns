@@ -3,48 +3,42 @@ package HW07.LinkedList;
 /**
  * Created by Sam on 10/9/2016.
  */
-public class LinkedList<S> implements AbstractList{
+public class LinkedList<T> {
 
-    private Node<S> head = null;
+    private Node<T> head = null;
 
-    @Override
     public Iter createIterator() {
-        return new LinkedListIterator<S>(this);
+        return new LinkedListIterator<T>(this);
     }
 
-    @Override
-    public void append(Node node) {
+    public void append(T t) {
         if (head==null){
-            head = node;
+            head = new Node<T>(t);
         }
         else {
-            Iter<Node> iter = createIterator();
-            while ( !iter.isDone() ) {
-                iter.next();
+            Node<T> temp = head;
+            while ( temp.getNext()!=null ) {
+                temp = temp.getNext();
             }
-            iter.currentItem().setNext(node);
+            temp.setNext(new Node<T>(t));
         }
     }
 
-    @Override
-    public void remove(Node node) {
+    public void remove(T t) {
 
-        if (head == node) {
+        if (head.returnData() == t) {
             head = head.getNext();
         } else {
-            Iter<Node> iter = createIterator();
-            do {
-                Node temp = iter.currentItem();
-                iter.next();
-                if (iter.currentItem() == node) {
-                    iter.next();
-                    temp.setNext(iter.currentItem());
+            Node temp = head;
+            while ( temp.getNext() != null ) {
+                if ( temp.getNext().returnData() == t ) {
+                    temp.setNext(temp.getNext().getNext());
                 }
-            } while (!iter.isDone());
+                else temp = temp.getNext();
+            }
         }
     }
 
-    @Override
     public Node getHead() {
         return head;
     }

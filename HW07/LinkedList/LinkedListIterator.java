@@ -3,7 +3,7 @@ package HW07.LinkedList;
 /**
  * Created by sam on 10/9/16.
  */
-public class LinkedListIterator<T> implements Iter<Node<T>> {
+public class LinkedListIterator<T> implements Iter<T> {
 
     private LinkedList<T> linkedList;
     private final Node<T> head;
@@ -27,12 +27,12 @@ public class LinkedListIterator<T> implements Iter<Node<T>> {
 
     @Override
     public boolean isDone() {
-        return  (current.getNext() == null);
+        return (current == null);
     }
 
     @Override
-    public Node currentItem() {
-        return current;
+    public T currentItem() {
+        return current.returnData();
     }
 
 }

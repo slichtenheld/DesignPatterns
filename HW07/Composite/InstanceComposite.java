@@ -1,5 +1,6 @@
 package HW07.Composite;
 
+import HW07.LinkedList.InstanceIterator;
 import HW07.LinkedList.Iter;
 
 /**
@@ -7,27 +8,30 @@ import HW07.LinkedList.Iter;
  */
 public class InstanceComposite extends Composite {
 
-    private Composite child;
+    private Component child = null;
 
-    public InstanceComposite(Composite component) {
+    public InstanceComposite(Component component) {
+        super.setInstanceID();
         add(component);
     }
 
     @Override
-    protected void doAdd( Composite part ) {
+    protected void doAdd( Component part ) {
+        if ( child != null ) child = part;
     }
 
     @Override
-    protected void doRemove( Composite part ) {
+    protected void doRemove( Component part ) {
+        child = null;
     }
 
     @Override
     public Iter makeIterator() {
-        return null;
+        return new InstanceIterator<>(child);
     }
 
     @Override
-    public Composite getChild(int num) {
+    public Component getChild(int num) {
         return child;
     }
 

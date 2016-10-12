@@ -10,7 +10,7 @@ package HW07.Composite;
 
 public abstract class Composite extends Component{
 
-    final public Composite add(Composite part ) {
+    final public Component add( Component part ) {
         try {
             // let composites define how children are added
             doAdd( part );
@@ -22,7 +22,7 @@ public abstract class Composite extends Component{
         return this; // returns itself????
     }
 
-    final public Composite remove(Composite part ) {
+    final public Component remove( Component part ) {
         try {
             // let composites define how children are removed
             doRemove( part );
@@ -34,29 +34,29 @@ public abstract class Composite extends Component{
         return this;
     }
 
-    private int depth() {
-        if (getParent()==null) return 0;
-        else return getParent().depth()+1;
-    }
+//    private int depth() {
+//        if (getParent()==null) return 0;
+//        else return getParent().depth()+1;
+//    }
 
-    private String indent(){
-        String indent = "";
-        for(int i = 0; i < depth(); i++){
-            indent+="   ";
-        }
-        return indent;
-    }
+//    private String indent(){
+//        String indent = "";
+//        for(int i = 0; i < depth(); i++){
+//            indent+="   ";
+//        }
+//        return indent;
+//    }
 
     //=================================================
     // Methods subclasses need to override
     //=================================================
 
 
-    protected void doAdd( Composite part ) {
+    protected void doAdd( Component part ) {
         throw new RuntimeException( "add() not supported" );
     }
 
-    protected void doRemove( Composite part ) {
+    protected void doRemove( Component part ) {
         throw new RuntimeException( "add() not supported" );
     }
 }
