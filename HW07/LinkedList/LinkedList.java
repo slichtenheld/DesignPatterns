@@ -43,20 +43,4 @@ public class LinkedList<T> {
         return head;
     }
 
-//    public boolean remove(T data) { // returns true if successful
-//        if (head.returnData() == data) { // if nodes component equals passed in component
-//            remove(head);
-//            return true;
-//        }
-//        else {
-//            Iter iter = createIterator(); // iterate through list and remove if data matches
-//            while (!iter.isDone()) {
-//                if (iter.next().returnData() == data) {
-//                    remove(iter.next());
-//                    return true;
-//                } else iter.traverse();
-//            }
-//            return false;
-//        }
-//    }
 }

@@ -12,20 +12,15 @@ import HW07.LinkedList.Node;
 public class main {
 
     public static void main(String[] args){
-//        daveTest();
-//        compositeListTest();
-//        compositeArrayTest();
+        compositeListTest();
+        compositeArrayTest();
         compositeInstanceTEST();
-//        linkedListTest();
-    }
-
-    public static void daveTest(){
-//        Composite lc = new LinkedComposite( new Leaf( "A" ), new Leaf( "B" ) );
-//        Composite ac = new ArrayComposite( new Leaf( "C" ), lc, new Leaf( "D" ) );
-//        System.out.println(ac.toString());
+        linkedListTest();
     }
 
     public static void compositeListTest(){
+        System.out.println("\nListComposite Test");
+
         LinkedComposite l = new LinkedComposite(new Leaf(), new Leaf(), new Leaf());
         LinkedComposite ll = new LinkedComposite(new Leaf(), new Leaf(), new Leaf());
         LinkedComposite lll = new LinkedComposite(l,ll);
@@ -38,6 +33,8 @@ public class main {
     }
 
     public static void compositeArrayTest(){
+        System.out.println("\nArrayComposite Test");
+
         Leaf l = new Leaf();
         InstanceComposite c = new InstanceComposite(l);
         ArrayComposite arrayComposite = new ArrayComposite(new Leaf(), new Leaf(), c);
@@ -55,6 +52,8 @@ public class main {
     }
 
     public static void compositeInstanceTEST() {
+        System.out.println("\nInstanceComposite Test");
+
         Leaf test = new Leaf();
         Leaf l = new Leaf();
         InstanceComposite i2 = new InstanceComposite(test);
@@ -62,32 +61,23 @@ public class main {
         InstanceComposite i = new InstanceComposite(i3);
         i2.remove(test);
         i2.add(l);
-        //System.out.println(instanceComposite3.toString() );
-        //System.out.println( instanceComposite2.toString() );
-
-        // FIXME: INSTANCE ITERATOR
-        System.out.println(test);
         for (Iter iter = i2.makeIterator(); !iter.isDone(); iter.next())
             System.out.println(iter.currentItem());
     }
 
     public static void linkedListTest(){
+        System.out.println("\nLinkedList Test");
+
         LinkedList<String> linkedList = new LinkedList();
 
-        //Node this_ = new Node();
-        //Node is_ = new Node();
-        //Node a_ = new Node();
-        //Node test_ = new Node();
         linkedList.append("This ");
         linkedList.append("is ");
         linkedList.append("a ");
         linkedList.append("test. ");
 
-        linkedList.remove("test. "); // FIXME: bug last one not getting removed
-        //linkedList.remove(test_);
-        linkedList.append("tsetsdf");
+        linkedList.remove("test. ");
 
-        //LinkedListIterator iter2 = new LinkedListIterator(linkedList);
+        linkedList.append("tsetsdf");
 
         for ( LinkedListIterator iter2 = new LinkedListIterator(linkedList);
                 !iter2.isDone(); iter2.next()) {

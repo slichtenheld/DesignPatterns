@@ -17,17 +17,17 @@ public class InstanceComposite extends Composite {
 
     @Override
     protected void doAdd( Component part ) {
-        if ( child != null ) child = part;
+        if ( child == null ) child = part;
     }
 
     @Override
     protected void doRemove( Component part ) {
-        child = null;
+        if (child == part) child = null;
     }
 
     @Override
     public Iter makeIterator() {
-        return new InstanceIterator<>(child);
+        return new InstanceIterator<Component>(child);
     }
 
     @Override
