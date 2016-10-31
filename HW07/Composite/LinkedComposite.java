@@ -1,54 +1,44 @@
 package HW07.Composite;
 
-import HW07.LinkedList.Iterator;
+import HW07.LinkedList.Iter;
 import HW07.LinkedList.LinkedList;
+import HW07.LinkedList.LinkedListIterator;
 import HW07.LinkedList.Node;
 
 /**
  * Created by sam on 10/9/16.
  */
-public class LinkedComposite extends AbstractComposite {
+public class LinkedComposite extends Composite {
 
     private LinkedList<Component> childrenList;
 
     public LinkedComposite(Component... components){
+        super.setInstanceID();
         childrenList = new LinkedList<>();
-        for (Component c : components) { //register each component with parent
-            add(c);
-        }
+        //register each component with parent
+        for (Component c : components) add(c);
+
     }
 
     @Override
-    public void add(Component component) {
-        childrenList.append(new Node<Component>(component));
-        component.setParent(this);
+    protected void doAdd( Component part ) {
+        childrenList.append(part);
     }
 
     @Override
-    public void remove(Component component) {
-        if (childrenList.remove(component)) { // if removal successful, dereference component's parent
-            component.setParent(null);
-        }
+    protected void doRemove( Component part ) {
+        childrenList.remove(part);
     }
 
     @Override
-    public AbstractComposite getChild(int num) {
-        return null;
+    public Iter makeIterator() {
+        return new LinkedListIterator<Component> (childrenList);
     }
 
     @Override
-    public String toString() {
-
-        String temp = "";
-        Iterator iter = childrenList.createIterator();
-        if (childrenList.getCount()==0) return super.toString() + "LinkedComposite containing";
-        temp+="\n";
-        temp += iter.currentItem().returnData().toString();
-        while ( !iter.isDone() ){
-            iter.traverse();
-            temp+="\n";
-            temp += iter.currentItem().returnData().toString();
-        }
-        return super.toString() + "LinkedComposite containing" + temp;
+    public Component getChild(int num) {
+        Iter<Component> iter = makeIterator();
+        for (int i = 0; i <= num; i++) iter.next();
+        return iter.currentItem();
     }
 }

@@ -1,40 +1,36 @@
 package HW07.Composite;
 
+import HW07.LinkedList.ArrayIterator;
+import HW07.LinkedList.Iter;
+
 /**
  * Created by sam on 10/9/16.
  */
-public class ArrayComposite extends AbstractComposite {
+public class ArrayComposite extends Composite {
 
     private Component[] children;
 
     public ArrayComposite(Component... components){
+        super.setInstanceID();
         this.children = components;
-        for (Component c : children) { //register each component with parent
-            c.setParent(this);
-        }
-    }
-
-    public void printParent(){
-        if (super.getParent()==null) System.out.println("\nparent null");
-        else System.out.println("\nnot null");
+        //register each component with parent
+        for (Component c : children) add(c);
     }
 
     @Override
-    public void add(Component component) {
-        for (int i = 0; i < children.length; i ++) {
-            if (children[i] == null) {
-                children[i] = component;
-                component.setParent(this);
+    protected void doAdd( Component part ) {
+        for ( int i = 0; i < children.length; i++ ) {
+            if ( children[i] == null ) {
+                children[i] = part;
                 break;
             }
         }
     }
 
     @Override
-    public void remove(Component component) {
-        for (int i = 0; i < children.length; i++){
-            if (children[i] == component) { // delete and remove parent
-                children[i].setParent(null);
+    protected void doRemove( Component part ) {
+        for ( int i = 0; i < children.length; i++ ) {
+            if ( children[i] == part ) {
                 children[i] = null;
                 break;
             }
@@ -42,20 +38,17 @@ public class ArrayComposite extends AbstractComposite {
     }
 
     @Override
-    public AbstractComposite getChild(int num) {
-        return null;
+    public Iter makeIterator() {
+        return new ArrayIterator(children);
     }
 
     @Override
-    public String toString() {
-        String temp = "";
-        for (int i = 0; i < children.length; i++){
-            if (children[i] != null){
-                temp+="\n";
-                temp+= children[i].toString();
-            }
+    public Component getChild(int num) {
+        try {
+            return children[num];
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw e;
         }
-        //temp = temp.substring(0, temp.length()-1);
-        return super.toString() + "ArrayComposite containing" + temp;
     }
+
 }
